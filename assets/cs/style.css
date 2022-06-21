@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+header {
+    padding: 50px;
+    background-color: beige;
+    text-align: center;
+}
+
+header h1 {
+    padding: 30px;
+    margin: 10px;
+    font-weight: bolder;
+}
+
+nav {
+    padding-top: 5px;
+    padding-bottom: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.main {
+    display: flex;
+}
+
+.main button {
+    align-items: center;
+    color: white;
+    background-color: blue;
+    border: 3px;
+    border-style: double;
+    margin: auto;
+    margin-top: 25px;
+    justify-content: center;
+}
