@@ -73,9 +73,56 @@ function start () {
             endGame();
         }
     },1000)
-    //if above "if" statment is not fufilled the function next will be executed presenting the next question
+    //if above "if" statment is not fufilled the function 'next' will be executed presenting the next question
     next()
 }
 
+//create function to iterate through the questions array
+function next () {
+    //increment through the array
+    currentQuestion++;
+    //if current question becomes greater than [questions] then run endGame function
+    if (currentQuestion > questions.length -1) {
+        endGame();
+        return;
+    }
+    else {
+        //create quiz element to house quiz content
+        var quizContent = document.getElementById("#quizBody");
+        //creates h2 element inside of quizContent to display [questions] with current question, then appends that element to quizContent
+        var h2 = document.createElement("h2");
+        h2.textContent = questions[currentQuestion].Que;
+        quizContent.append(h2);
+        //create ordered list element setting its Id and appending it also to quizContent
+        var ol = document.createElement("ol");
+        ol.setAttribute("id", "Choice");
+        quizContent.append(ol);
+        //creates div for answers
+        var showAns = document.createElement('div');
 
+        //for loop to create buttons for each choice available 
+        for(var i = 0; i < questions[currentQuestion].Cho.length; i++) {
+            //clearing the content inside of showAns
+            showAns.textcontent = "";
+            var buttonCode = "<button onclick=\"[Ans]\">[choice]</button>";
+            //once the button choice is clicked it will replace the old questions choices with the next questions choices
+            buttonCode = buttonCode.replace("[choice]", questions[currentQuestion].Cho[i]);
+
+            //if the choice is equal to the answer then it will be correct if not it will be incorrect
+            if(questions[currentQuestion].Cho[i] == questions[currentQuestion].Ans){
+                buttonCode = buttonCode.replace("[Ans]", "correct()");
+            }
+            else {
+                buttonCode = buttonCode.replace("[Ans]", "incorrect()");
+            }
+            
+            //make list element to hold the button code variable we declared
+            var li = document.createElement("li");
+            li.innerHTML = buttonCode;
+            //we then append the list to orered list which is then appended to quizContent all housed inside of the div
+            ol.append(li);
+            quizContent.append(ol);
+            ol.append(showAns);
+        }
+    }
 }
