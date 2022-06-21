@@ -52,3 +52,30 @@ quizBody.append(startBtn);
 startBtn.addEventListener("click", function (){
     start();
 });
+
+//function to start the timer 
+function start () {
+    //clears the innerHtml to present questions
+    document.getElementById("quizBody").innerHTML = "";
+    //sets the value for timeLeft
+    timeleft = questions.length * 10;
+    document.querySelector("#timeLeft").textcontent = timeleft;
+
+    //creating the timer element 
+    timer = setInterval(function (){
+        timeleft--;
+        document.querySelector("#timeLeft").textcontent = timeleft;
+
+        //if timeLeft ever reaches zero the quiz will be over console will clear all elements and stop the timer running the endgame function.
+        if(timeleft <= 0) {
+            document.getElementById("quizBody").innerHTML = "";
+            clearInterval(timer);
+            endGame();
+        }
+    },1000)
+    //if above "if" statment is not fufilled the function next will be executed presenting the next question
+    next()
+}
+
+
+}
