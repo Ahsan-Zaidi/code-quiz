@@ -187,7 +187,7 @@ function getScore () {
     h1.textcontent = localStorage.getItem("highscore");
     quizBodyEl.append(h1);
 
-
+    //creating  button to clear localstorage so once its clicked it will used the function clearScore
     var clearStorage = document.createElement("button");
     clearStorage.textContent = "clear scores";
     quizBodyEl.append(clearStorage);
@@ -195,3 +195,12 @@ function getScore () {
     clearScore();
     });
 }
+
+//function to clear localstorage setting element ids to an empty string
+function clearScore () {
+    localStorage.setItem("highscore", "");
+    localStorage.setItem("playername", "");
+    document.getElementById("gethighscore").textContent = "";
+    document.getElementById("getplayername").textcontent = "";
+}
+
