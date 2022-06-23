@@ -180,9 +180,18 @@ function getScore () {
     h2.setAttribute("id", "getplayername");
     h2.textContent = localStorage.getItem("playername") + "'s high score is:";
     quizBodyEl.append(h2);
+
     //element to display highscores to users
     var h1 = document.createElement("h1");
     h1.setAttribute("id", "gethighscore");
     h1.textcontent = localStorage.getItem("highscore");
     quizBodyEl.append(h1);
+
+
+    var clearStorage = document.createElement("button");
+    clearStorage.textContent = "clear scores";
+    quizBodyEl.append(clearStorage);
+    clearStorage.addEventListener("click", function() {
+    clearScore();
+    });
 }
