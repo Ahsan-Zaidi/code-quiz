@@ -126,3 +126,63 @@ function next () {
         }
     }
 }
+
+//function to call the end of the game
+function endGame () {
+    //stops the timer from running
+    clearInterval(timer);
+
+    //create elements inside quizbody to notify player game is over
+    var quizEl = document.getElementById("quizBody");
+    var h2El = document.createElement("h2");
+    h2El.textcontent = "Game Over";
+    quizEl.append(h2El)
+
+    //establishing element and variable to display the score the user recieves
+    var h3El = document.createElement("h3");
+    h3El.textContent = "you got a " + score + "/" + questions.length * 20;
+    quizEl.append(h3El);
+    var h3El2 = document.createElement("h3");
+    h3El2.textcontent = "You got " + score / 20 + "questions correct.";
+    quizEl.append(h3El2);
+
+    //creating + setting type and id of an input element to take users name for high scores
+    var firstName = document.createElement("input");
+    firstName.setAttribute("type", "text");
+    firstName.setAttribute("id", "name");
+    firstName.placeholder = "Enter your initials";
+    quizEl.append(firstName);
+
+    //creating button element to save user scores
+    var scoreBtn = scoreBtn = document.createElement("button");
+    scoreBtn.setAttribute("id", "setscore");
+    scoreBtn.textContent = "Save your score!";
+    quizEl.append(scoreBtn);
+
+    //adding event listener to scoreBtn so that once clicked will activate the setScore function
+    scoreBtn.addEventListener("click", function(){
+        setScore();
+    })
+}
+
+//function will set users score and store them into localstorage
+function setScore() {
+    localStorage.setItem("highscore", score);
+    localStorage.setItem("playername", document.getElementById('name').value);
+    alert("Saved");
+}
+
+//function to get the scores of players who have played the game
+function getScore () {
+    //making of elements to display scores
+    var quizBodyEl = document.getElementById("quizBody");
+    var h2 = document.createElement("h2");
+    h2.setAttribute("id", "getplayername");
+    h2.textContent = localStorage.getItem("playername") + "'s high score is:";
+    quizBodyEl.append(h2);
+    //element to display highscores to users
+    var h1 = document.createElement("h1");
+    h1.setAttribute("id", "gethighscore");
+    h1.textcontent = localStorage.getItem("highscore");
+    quizBodyEl.append(h1);
+}
