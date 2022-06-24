@@ -29,7 +29,7 @@ var questions = [{
 //global variables to be used throughout the script
 var grade = 0;
 var currentQuestion = -1;
-var timeRem = 0;
+var timeLeft = 0;
 var timer;
 
 //function to start the timer 
@@ -37,16 +37,16 @@ function start () {
     //clears the innerHtml to present questions
     document.getElementById("quizBody").innerHTML = "";
     //sets the value for timeLeft
-    timeleft = questions.length * 10;
-    document.querySelector("#timeLeft").textcontent = timeleft;
+    timeLeft = questions.length * 10;
+    document.querySelector("#timeLeft").textContent = timeLeft;
 
     //creating the timer element 
     timer = setInterval(function (){
-        timeleft--;
-        document.querySelector("#timeLeft").textcontent = timeleft;
+        timeLeft--;
+        document.querySelector("#timeLeft").textContent = timeLeft;
 
         //if timeLeft ever reaches zero the quiz will be over console will clear all elements and stop the timer running the endgame function.
-        if(timeleft <= 0) {
+        if(timeLeft <= 0) {
             document.getElementById("quizBody").innerHTML = "";
             clearInterval(timer);
             endGame();
@@ -86,7 +86,7 @@ function incorrect() {
 
 //function to reward player for getting the question correct
 function correct() {
-    score += 20;
+    grade += 20;
     document.getElementById("quizBody").innerHTML = " ";
     next();
 }
@@ -102,7 +102,7 @@ function next () {
     }
     else {
         //create quiz element to house quiz content
-        var quizContent = document.getElementById("#quizBody");
+        var quizContent = document.getElementById("quizBody");
         //creates h2 element inside of quizContent to display [questions] with current question, then appends that element to quizContent
         var h2 = document.createElement("h2");
         h2.textContent = questions[currentQuestion].Que;
@@ -154,10 +154,10 @@ function endGame () {
 
     //establishing element and variable to display the score the user recieves
     var h3El = document.createElement("h3");
-    h3El.textContent = "you got a " + score + "/" + questions.length * 20;
+    h3El.textContent = "you got a " + grade + "/" + questions.length * 20;
     quizEl.append(h3El);
     var h3El2 = document.createElement("h3");
-    h3El2.textcontent = "You got " + score / 20 + "questions correct.";
+    h3El2.textcontent = "You got " + grade / 20 + "questions correct.";
     quizEl.append(h3El2);
 
     //creating + setting type and id of an input element to take users name for high scores
@@ -181,7 +181,7 @@ function endGame () {
 
 //function will set users score and store them into localstorage
 function setScore() {
-    localStorage.setItem("highscore", score);
+    localStorage.setItem("highscore", grade);
     localStorage.setItem("playername", document.getElementById('name').value);
     alert("Saved");
 }
@@ -198,7 +198,7 @@ function getScore () {
     //element to display highscores to users
     var h1 = document.createElement("h1");
     h1.setAttribute("id", "gethighscore");
-    h1.textcontent = localStorage.getItem("highscore");
+    h1.textContent = localStorage.getItem("highscore");
     quizBodyEl.append(h1);
 
     //creating  button to clear localstorage so once its clicked it will used the function clearScore
@@ -218,3 +218,30 @@ function clearScore () {
     document.getElementById("getplayername").textcontent = "";
 }
 
+
+//creating anchor tag link in the nav bar to diplay highscores on the event click
+var navLeft = document.createElement('div');
+navLeft.setAttribute("class", "left")
+document.querySelector("#nav").append(navLeft);
+var a = document.createElement('a');
+a.setAttribute("href", "#")
+a.addEventListener("click", function () {
+document.getElementById("quizBody").innerHTML = " ";
+getScore();});
+
+navLeft.append(a);
+var h4 = document.createElement('h4');
+h4.textContent = "High Scores";
+a.append(h4);
+
+//countdown timer displayed on navbar right
+var navRight = document.createElement('div');
+navRight.setAttribute("class", "right")
+document.querySelector("#nav").append(navRight);
+var h42 = document.createElement('h42');
+h42.textContent = "Timer :";
+navRight.append(h42);
+var span = document.createElement('span');
+span.setAttribute("id", "timeLeft")
+span.textContent="0";
+h42.append(span)
