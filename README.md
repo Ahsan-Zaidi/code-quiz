@@ -30,10 +30,10 @@
 
 I have created a coding quiz with the purpose of checking the users knowledge on Javascript.
 
-✋ [GitHub Repository]
+✋ [GitHub Repository] https://github.com/Ahsan-Zaidi/code-quiz
 
 
-✋ [Deployed App]
+✋ [Deployed App] https://ahsan-zaidi.github.io/code-quiz/
 
 
 ## ✋User Story
